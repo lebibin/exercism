@@ -1,6 +1,7 @@
 class Scrabble
   attr_reader :score
 
+  BASE_SCORE = 0
   SCORE_TABLE = {
     1   => %w{A E I O U L N R S T},
     2   => %w{D G},
@@ -9,28 +10,25 @@ class Scrabble
     5   => %w{K},
     8   => %w{J X},
     10  => %w{Q Z}
-  }
-
-  def self.score(word)
-    Scrabble.new(word).score
-  end
+  }.freeze
 
   def initialize(word)
     @score = score_for(word)
   end
 
+  def self.score(word)
+    Scrabble.new(word).score
+  end
+
+  private
   def score_for word
-    total_score = 0
+    return BASE_SCORE if word.nil?
 
-    return total_score if word.nil?
-
-    word.split('').each do |letter|
+    word.split('').inject(BASE_SCORE) do |sum, letter|
       SCORE_TABLE.each do |score, letters|
-        total_score += score if letters.include?(letter.upcase)
+        sum += score if letters.include?(letter.upcase)
       end
+      sum
     end
-
-    total_score
-
   end
 end
