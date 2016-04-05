@@ -69,7 +69,7 @@ PRETTY_PRINT_TO_TEST = [
 ]
 
 RSpec.describe PhoneNumber do
-  context '#number' do
+  describe '#number' do
     NUMBERS_TO_TEST.each do |number|
       it "should clean '#{number[:raw]}' to '#{number[:clean]}'" do
         clean_number = PhoneNumber.new(number[:raw]).number
@@ -78,7 +78,7 @@ RSpec.describe PhoneNumber do
     end
   end
 
-  context '#area_code' do
+  describe '#area_code' do
     AREA_CODES_TO_TEST.each do |number|
       it "should parse code of '#{number[:raw]}' to '#{number[:code]}'" do
         phone_number = PhoneNumber.new(number[:raw])
@@ -87,7 +87,7 @@ RSpec.describe PhoneNumber do
     end
   end
 
-  context '#to_s' do
+  describe '#to_s' do
     PRETTY_PRINT_TO_TEST.each do |number|
       it "should pretty print '#{number[:raw]}' to '#{number[:pretty]}'" do
         phone_number = PhoneNumber.new(number[:raw])
