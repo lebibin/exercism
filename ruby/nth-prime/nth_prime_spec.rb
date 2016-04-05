@@ -26,8 +26,7 @@ end
 require_relative 'nth_prime'
 
 RSpec.describe Prime do
-  context '.nth(n)' do
-
+  describe '.nth(n)' do
     it 'returns 1st prime correctly as 2' do
       expect(Prime.nth(1)).to eq(2)
     end
@@ -47,6 +46,5 @@ RSpec.describe Prime do
     it 'raises ArgumentError for 0th prime' do
       expect{Prime.nth(0)}.to raise_error(ArgumentError)
     end
-
   end
 end
