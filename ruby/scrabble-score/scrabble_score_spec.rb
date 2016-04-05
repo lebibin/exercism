@@ -39,7 +39,7 @@ WORDS_TO_SCORE = [
 ]
 
 RSpec.describe Scrabble do
-  context '#score' do
+  describe '#score' do
     WORDS_TO_SCORE.each do |word|
       it "#{word[:raw].inspect} for #{word[:score]} points" do
         expect(Scrabble.new(word[:raw]).score).to eq(word[:score])
