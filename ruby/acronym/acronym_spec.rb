@@ -16,7 +16,7 @@ ACRONYM_PAIRS =
 }.freeze
 
 RSpec.describe Acronym do
-  context ".abbreviate" do
+  describe ".abbreviate" do
     ACRONYM_PAIRS.each do |given, expected|
       it "shortens #{given} to #{expected}" do
         expect(Acronym.abbreviate(given)).to eq(expected)
