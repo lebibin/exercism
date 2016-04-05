@@ -1,11 +1,10 @@
 class PhoneNumber
-
   BAD_NUMBER = '0000000000'
 
   attr_reader :number, :area_code
 
   def initialize number
-    @number, @area_code = if is_valid?(number)
+    @number, @area_code = if is_valid? number
                             clean_number = clean_number(number)
                             [clean_number, clean_number[0..2]]
                           else
@@ -14,12 +13,13 @@ class PhoneNumber
   end
 
   def to_s
-    pretty_print self.number
+    pretty_print @number
   end
 
+  private
   def clean_number number
     clean_number = number.gsub(/\D/, '')
-    if clean_number.length == 11 && clean_number[0] == '1'
+    if clean_number.length == 11 && clean_number.chars.first == '1'
       clean_number[1..10]
     else
       clean_number
@@ -29,20 +29,19 @@ class PhoneNumber
   def pretty_print number
     clean_number = clean_number(number)
     start_index = number.length - 10
-    pretty_print = ""
-    for i in start_index..9
-      if i == start_index
-        pretty_print += "(#{number[i]}"
-      elsif i == (start_index + 2)
-        pretty_print += "#{number[i]}) "
-      elsif i == (start_index + 5)
-        pretty_print += "#{number[i]}-"
-      else
-        pretty_print += number[i]
+    "".tap do |pretty_number|
+      for i in start_index..9
+        if i == start_index
+          pretty_number << "(#{number[i]}"
+        elsif i == (start_index + 2)
+          pretty_number << "#{number[i]}) "
+        elsif i == (start_index + 5)
+          pretty_number << "#{number[i]}-"
+        else
+          pretty_number << number[i]
+        end
       end
-
     end
-    pretty_print
   end
 
   def is_valid? number
@@ -57,5 +56,4 @@ class PhoneNumber
       false
     end
   end
-
 end
